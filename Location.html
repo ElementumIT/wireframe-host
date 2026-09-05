@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Claiming App — Location</title>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 24px; margin-bottom: 8px; color: #1f2937; }
+    .meta { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+    .preview { border: 1px solid #e5e7eb; border-radius: 8px; background: white; overflow: hidden; }
+    #excalidraw { width: 100%; height: 600px; display: block; }
+    .notes { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .note-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; }
+    .note-card h3 { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: #1f2937; }
+    .note-card ul { margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.7; }
+    .color-key { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
+    .download { margin-top: 16px; }
+    .download a { display: inline-block; padding: 8px 16px; background: #3b82f6; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; }
+    .download a:hover { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Unit Claiming App — Location</h1>
+    <div class="meta">Branch screen for the Location variation (DataCollectionSteps=10: GetLocation). Source: <code>Location.cs</code>. 367×268 control. Princeton-only.</div>
+
+    <div class="preview">
+      <canvas id="excalidraw"></canvas>
+    </div>
+
+    <div class="notes">
+      <div class="note-card">
+        <h3>Color Key</h3>
+        <ul>
+          <li><span class="color-key" style="background:#4ade80"></span>Next/Enter — primary (green)</li>
+          <li><span class="color-key" style="background:#e5e7eb;border:1px solid #9ca3af"></span>Previous — enabled (gray)</li>
+          <li><span class="color-key" style="background:#3b82f6"></span>Step flow / annotations (blue)</li>
+          <li><span class="color-key" style="background:#22c55e"></span>Validation note (green)</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Location — Overview</h3>
+        <ul>
+          <li><strong>Control:</strong> Location UserControl (367×268), implements IDataCollectionControl</li>
+          <li><strong>Main input:</strong> tbLocation (271×20) — location printed on label</li>
+          <li><strong>Only 3 steps total:</strong> Badge → Location → Complete</li>
+          <li><strong>Header:</strong> "Unit Claiming - Print Location Label" (Princeton only)</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Conditional UI & Validation</h3>
+        <ul>
+          <li><strong>IsValid:</strong> FALSE if location is empty, else TRUE</li>
+          <li><strong>AllowKeyboardEntry:</strong> no-op</li>
+          <li><strong>If empty → blocks advancing</strong> to SkidDataComplete</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Navigation & Flow</h3>
+        <ul>
+          <li><strong>Previous</strong> → Employee Authorization (1) — enabled</li>
+          <li><strong>Next (Enter)</strong> → SkidDataComplete (6)</li>
+          <li>Enter = Next, Esc = Previous</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="download">
+      <a href="UnitClaiming_Location.excalidraw" download>Download editable .excalidraw file</a>
+    </div>
+  </div>
+
+  <script>
+    fetch('UnitClaiming_Location.excalidraw')
+      .then(r => r.json())
+      .then(data => {
+        const canvas = document.getElementById('excalidraw');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 960;
+        canvas.height = 600;
+
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          data.elements.forEach(el => {
+            if (el.isDeleted) return;
+            if (el.type === 'rectangle') {
+              ctx.strokeStyle = el.strokeColor;
+              ctx.fillStyle = el.backgroundColor;
+              ctx.lineWidth = el.strokeWidth;
+              if (el.strokeStyle === 'dashed') ctx.setLineDash([5, 5]);
+              else ctx.setLineDash([]);
+              ctx.globalAlpha = el.opacity / 100;
+              const r = el.roundness?.type === 3 ? 8 : 0;
+              roundRect(ctx, el.x, el.y, el.width, el.height, r);
+              if (el.backgroundColor !== 'transparent') ctx.fill();
+              ctx.stroke();
+              ctx.globalAlpha = 1;
+              ctx.setLineDash([]);
+            } else if (el.type === 'text') {
+              ctx.fillStyle = el.strokeColor;
+              ctx.font = `${el.fontSize}px ${el.fontFamily === 1 ? 'system-ui, sans-serif' : 'monospace'}`;
+              ctx.textAlign = el.textAlign;
+              ctx.textBaseline = el.verticalAlign === 'middle' ? 'middle' : 'top';
+              ctx.globalAlpha = el.opacity / 100;
+              ctx.fillText(el.text, el.x + (el.containerId ? el.width/2 : 0), el.y + (el.containerId ? el.height/2 : el.fontSize));
+              ctx.globalAlpha = 1;
+            }
+          });
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+          if (r <= 0) { ctx.rect(x, y, w, h); return; }
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.lineTo(x + w - r, y);
+          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+          ctx.lineTo(x + w, y + h - r);
+          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          ctx.lineTo(x + r, y + h);
+          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+          ctx.closePath();
+        }
+
+        draw();
+      });
+  </script>
+</body>
+</html>

@@ -101,6 +101,42 @@
     </div>
 
     <div style="margin-top: 40px; padding: 24px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+      <h3 style="margin-top: 0;">Variation Branch Screens</h3>
+      <p style="color: #6b7280; font-size: 14px; line-height: 1.5;">Screens used only by specific <code>MainFormVariation</code> values. The 7 steps above are shared; these three branch from the core flow.</p>
+      <div class="grid">
+        <div class="card">
+          <span class="step">MachineNumber ×</span>
+          <h2>Machine Number</h2>
+          <p>Only for the MachineNumber variation (step 8). Badge → Machine Number → Complete. Prints a machine number label. Always valid — never blocks Next.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="MachineNumber.html" target="_blank">View Preview</a>
+            <a class="btn btn-secondary" href="UnitClaiming_MachineNumber.excalidraw" download>Download .excalidraw</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="step">Location ×</span>
+          <h2>Location</h2>
+          <p>Only for the Location variation (step 10, Princeton only). Badge → Location → Complete. Prints a location label. Fails Next if the location is empty.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="Location.html" target="_blank">View Preview</a>
+            <a class="btn btn-secondary" href="UnitClaiming_Location.excalidraw" download>Download .excalidraw</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="step">Standard / Combo / LowVolume ×</span>
+          <h2>Skid Id from License Plate</h2>
+          <p>Conditional step 12, shown when the prod line requires a pre-printed Skid Id. Scans Skid Id, cross-checks serial/model on the plate, handles 9-yr duplicates + replacement. Auto-skips when not required.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="SkidIdFromLicensePlate.html" target="_blank">View Preview</a>
+            <a class="btn btn-secondary" href="UnitClaiming_SkidIdFromLicensePlate.excalidraw" download>Download .excalidraw</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 24px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
       <h3 style="margin-top: 0;">Data Collection Flow</h3>
       <pre style="background: #1f2937; color: #e5e7eb; padding: 16px; border-radius: 8px; font-size: 13px; overflow-x: auto;">GetEmployeeAuthorization (1)
     → GetPartNumber (2)
