@@ -58,6 +58,46 @@
           <a class="btn btn-secondary" href="UnitClaiming_PartNumber.excalidraw" download>Download .excalidraw</a>
         </div>
       </div>
+
+      <div class="card">
+        <span class="step">Step 4</span>
+        <h2>Serial Number Entry</h2>
+        <p>Serial number scan/entry (DataCollectionSteps=3). 2D barcode parsing, FAS Cell extraction. Variation-specific validation: BoxLabel, StandardReprint, LowVolume, Standard/Combo. Sample serial list for testing.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="SerialNumber.html" target="_blank">View Preview</a>
+          <a class="btn btn-secondary" href="UnitClaiming_SerialNumber.excalidraw" download>Download .excalidraw</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step">Step 5</span>
+        <h2>Pallet Quantity</h2>
+        <p>Skid quantity entry (DataCollectionSteps=4). Saves SkidQuantity + ClaimedQty. Standard variation disables Previous when coming from Part/Serial (ticket #84304). Combo: dual skid index tracking.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="PalletQty.html" target="_blank">View Preview</a>
+          <a class="btn btn-secondary" href="UnitClaiming_PalletQty.excalidraw" download>Download .excalidraw</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step">Step 6</span>
+        <h2>Skid Weight</h2>
+        <p>Skid weight entry (DataCollectionSteps=5). Scale integration (PullWeightFromScale, Re-read scale). Partial claim, replacement skid, extended model number, wood pallet override — all conditional UI. Debug console.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="SkidWeight.html" target="_blank">View Preview</a>
+          <a class="btn btn-secondary" href="UnitClaiming_SkidWeight.excalidraw" download>Download .excalidraw</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="step">Step 7</span>
+        <h2>Skid Complete</h2>
+        <p>Terminal step (DataCollectionSteps=6). Review all data, variation-dependent Print/Save button. On success: print labels, save to DB, AfterSave() → back to Main Menu. History/reprint mode supported.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="SkidComplete.html" target="_blank">View Preview</a>
+          <a class="btn btn-secondary" href="UnitClaiming_SkidComplete.excalidraw" download>Download .excalidraw</a>
+        </div>
+      </div>
     </div>
 
     <div style="margin-top: 40px; padding: 24px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
