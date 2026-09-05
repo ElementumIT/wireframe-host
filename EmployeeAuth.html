@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Claiming App — Employee Authorization Wireframe</title>
+  <style>
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 24px; margin-bottom: 8px; color: #1f2937; }
+    .meta { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+    .preview { border: 1px solid #e5e7eb; border-radius: 8px; background: white; overflow: hidden; }
+    #excalidraw { width: 100%; height: 600px; display: block; }
+    .notes { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .note-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; }
+    .note-card h3 { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: #1f2937; }
+    .note-card ul { margin: 0; padding-left: 20px; font-size: 13px; color: #374151; line-height: 1.7; }
+    .color-key { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 8px; vertical-align: middle; }
+    .download { margin-top: 16px; }
+    .download a { display: inline-block; padding: 8px 16px; background: #3b82f6; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; }
+    .download a:hover { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Unit Claiming App — Employee Authorization Wireframe</h1>
+    <div class="meta">Second screen (DataCollectionSteps=1: GetEmployeeAuthorization). Source: <code>UnitClaimingMainForm.cs</code>, <code>UnitClaimingMainFormController.cs</code>. 880×520 client area.</div>
+
+    <div class="preview">
+      <canvas id="excalidraw"></canvas>
+    </div>
+
+    <div class="notes">
+      <div class="note-card">
+        <h3>Color Key</h3>
+        <ul>
+          <li><span class="color-key" style="background:#4ade80"></span>Next/Enter — primary action (green)</li>
+          <li><span class="color-key" style="background:#f3f4f6;border:1px solid #9ca3af"></span>Previous — disabled at this step (gray)</li>
+          <li><span class="color-key" style="background:#3b82f6"></span>Step logic annotations (blue)</li>
+          <li><span class="color-key" style="background:#22c55e"></span>Navigation notes (green)</li>
+          <li><span class="color-key" style="background:#f59e0b"></span>Variation notes (amber)</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Step: GetEmployeeAuthorization</h3>
+        <ul>
+          <li><strong>Control:</strong> EmployeeNumber (implements IDataCollectionControl)</li>
+          <li><strong>Input:</strong> any 5-digit integer (policy since 2/24/2015)</li>
+          <li><strong>On Enter/Next:</strong> save badge, cache in MDI parent, LoadSecurityModel()</li>
+          <li><strong>Security:</strong> missing record → default access (User=true, Overrider=false, Admin=false, KeyboardEntry=false)</li>
+          <li><strong>DeniedAccess:</strong> step 0 shown if UnitClaimingUser=false</li>
+          <li><strong>Plant:</strong> loaded from user config, set on skid record</li>
+          <li><strong>Advances to:</strong> GetPartNumber (step 2)</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Idle / Session</h3>
+        <ul>
+          <li>IdleTimer (configurable) resets on any input</li>
+          <li>Warning countdown in MDI status bar</li>
+          <li>Timeout → AfterSave() → return to Main Menu</li>
+          <li>Employee badge timeout separate (EmployeeBadgeTimeoutSecs)</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Navigation</h3>
+        <ul>
+          <li>Previous — DISABLED at this step</li>
+          <li>Next (Enter) — enabled, green, Enter key = Next</li>
+          <li>Badge cached in MDI parent for session</li>
+          <li>Badge timeout enforced separately</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>Variations</h3>
+        <ul>
+          <li>Same screen for ALL variations (Standard, Reprint, LowVolume, Combo, BoxLabel, MachineNumber, Location, KitClaiming)</li>
+          <li>Only FormHeaderText changes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="download">
+      <a href="UnitClaiming_EmployeeAuth.excalidraw" download>Download editable .excalidraw file</a>
+    </div>
+  </div>
+
+  <script>
+    fetch('UnitClaiming_EmployeeAuth.excalidraw')
+      .then(r => r.json())
+      .then(data => {
+        const canvas = document.getElementById('excalidraw');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 960;
+        canvas.height = 600;
+
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          data.elements.forEach(el => {
+            if (el.isDeleted) return;
+            if (el.type === 'rectangle') {
+              ctx.strokeStyle = el.strokeColor;
+              ctx.fillStyle = el.backgroundColor;
+              ctx.lineWidth = el.strokeWidth;
+              if (el.strokeStyle === 'dashed') ctx.setLineDash([5, 5]);
+              else ctx.setLineDash([]);
+              ctx.globalAlpha = el.opacity / 100;
+              const r = el.roundness?.type === 3 ? 8 : 0;
+              roundRect(ctx, el.x, el.y, el.width, el.height, r);
+              if (el.backgroundColor !== 'transparent') ctx.fill();
+              ctx.stroke();
+              ctx.globalAlpha = 1;
+              ctx.setLineDash([]);
+            } else if (el.type === 'text') {
+              ctx.fillStyle = el.strokeColor;
+              ctx.font = `${el.fontSize}px ${el.fontFamily === 1 ? 'system-ui, sans-serif' : 'monospace'}`;
+              ctx.textAlign = el.textAlign;
+              ctx.textBaseline = el.verticalAlign === 'middle' ? 'middle' : 'top';
+              ctx.globalAlpha = el.opacity / 100;
+              ctx.fillText(el.text, el.x + (el.containerId ? el.width/2 : 0), el.y + (el.containerId ? el.height/2 : el.fontSize));
+              ctx.globalAlpha = 1;
+            }
+          });
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+          if (r <= 0) { ctx.rect(x, y, w, h); return; }
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.lineTo(x + w - r, y);
+          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+          ctx.lineTo(x + w, y + h - r);
+          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          ctx.lineTo(x + r, y + h);
+          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+          ctx.closePath();
+        }
+
+        draw();
+      });
+  </script>
+</body>
+</html>
