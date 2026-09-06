@@ -117,6 +117,8 @@
   let ox_a = 0, oy_a = 0;  // translation in art coords: screen = (art * scale) + (ox_a,oy_a)
   let dpr = window.devicePixelRatio || 1;
   const ctx = canvas.getContext('2d');
+  let artData = null;                       // raw excalidraw JSON (for link hit-testing)
+  const artOff = { minX: 0, minY: 0, pad: 40 };  // art-space -> element-space offset
 
   function resizeView() {
     const w = preview.clientWidth, h = preview.clientHeight;
@@ -169,6 +171,7 @@
     const a = art.getContext('2d');
     a.fillStyle = '#ffffff'; a.fillRect(0, 0, artW, artH);
     a.translate(pad - minX, pad - minY);
+    artData = data; artOff.minX = minX; artOff.minY = minY; artOff.pad = pad;
 
     function fontFor(el) {
       const sizes = {11:13,12:14,13:15,14:16,16:19,18:21,20:24,15:17};
@@ -265,6 +268,37 @@
   });
   function endPtr(e){ if(state.mode==='pinch'){state.mode=null;} else if(state.mode==='pan'){state.mode=null;} }
   canvas.addEventListener('pointerup', endPtr);
+  canvas.addEventListener('pointercancel', () => { downCount = 0; });
+
+  // ---------- clickable element links (see 11-wireframe-process/09-clickable-navigation) ----------
+  let downCount = 0, downX = 0, downY = 0;
+  canvas.addEventListener('pointerdown', e => { downCount++; downX = e.clientX; downY = e.clientY; });
+  function elAt(ax, ay) {
+    if (!artData) return null;
+    const ex = ax - artOff.pad + artOff.minX, ey = ay - artOff.pad + artOff.minY;
+    const els = artData.elements;
+    for (let i = els.length - 1; i >= 0; i--) {
+      const el = els[i];
+      if (el.isDeleted || !el.link || el.angle || el.type === 'arrow') continue;
+      if (ex >= el.x && ex <= el.x + el.width && ey >= el.y && ey <= el.y + el.height) return el;
+    }
+    return null;
+  }
+  function artPoint(e) {
+    const r = preview.getBoundingClientRect();
+    return screenToArt(e.clientX - r.left, e.clientY - r.top);
+  }
+  canvas.addEventListener('pointerup', e => {
+    const wasTap = (downCount === 1) && Math.hypot(e.clientX - downX, e.clientY - downY) < 6;
+    downCount = Math.max(0, downCount - 1);
+    if (!wasTap) return;
+    const hit = elAt(artPoint(e)[0], artPoint(e)[1]);
+    if (hit && hit.link) window.location.href = hit.link;
+  });
+  canvas.addEventListener('pointermove', e => {
+    if (e.buttons || !artData) return;   // don't fight pan/pinch
+    canvas.style.cursor = elAt(artPoint(e)[0], artPoint(e)[1]) ? 'pointer' : '';
+  });
   canvas.addEventListener('pointercancel', endPtr);
   canvas.addEventListener('pointerleave', endPtr);
   canvas.addEventListener('wheel', e => {
