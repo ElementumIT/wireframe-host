@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pallet Quantity — Unit Claiming (4 / 6)</title>
+<title>Employee Authorization — Box Label (1 / 5)</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3EW%3C/text%3E%3C/svg%3E">
 <style>
   html { font-size: 16px; }
@@ -64,43 +64,45 @@
 </style>
 </head>
 <body>
-<nav class="crumb"><a href="../index.html">viz index</a> &rsaquo; <a href="../UnitClaimingMainForm.html">UnitClaimingMainForm</a> &rsaquo; Unit Claiming</nav>
-<div class="eyebrow">Unit Claiming &middot; Unit Claiming &middot; step 4 / 6</div>
-<h1>Step 4 — Pallet Quantity</h1>
-<p>Standard variation.</p>
+<nav class="crumb"><a href="../../index.html">viz index</a> &rsaquo; <a href="../../UnitClaimingMainForm.html">UnitClaimingMainForm</a> &rsaquo; Box Label</nav>
+<div class="eyebrow">Unit Claiming &middot; Box Label &middot; step 1 / 5</div>
+<h1>Step 1 — Employee Authorization</h1>
+<p>Box-label flow: quantity before serial.</p>
 <div class="steps">
-<a class="done" href="01-employee-auth.html">1. Employee Auth</a><a class="done" href="02-part-number.html">2. Part Number</a><a class="done" href="03-serial-number.html">3. Serial Number</a><span class="cur">4. Pallet Qty</span><a class="done" href="05-skid-weight.html">5. Skid Weight</a><a class="done" href="06-skid-complete.html">6. Complete</a>
+<span class="cur">1. Employee Auth</span><a class="done" href="02-part-number.html">2. Part Number</a><a class="done" href="03-pallet-quantity.html">3. Pallet Qty</a><a class="done" href="04-serial-number.html">4. Serial Number</a><a class="done" href="05-skid-complete.html">5. Complete</a>
 </div>
 <div class="mock">
 
-    <div class="panel"><h2>Enter quantity</h2>
-      <div class="field"><label>Scan the pallet quantity for this part</label><input type="text" placeholder="40"></div>
+    <div class="panel"><h2>Scan badge</h2>
+      <div class="field"><label>Scan your employee badge</label><input type="text" placeholder="_____"></div>
+      <p class="hint">(Use 11111 for testing)</p>
+      <div class="note">Any 5-digit integer passes (2/24/2015 decision); unknown badges get default User rights, no Admin, no keyboard entry.</div>
     </div>
 
     <div class="panel"><h2>Skid summary (live)</h2>
       <dl class="summary">
         <dt>Employee Badge #:</dt><dd class="ebadge">11111</dd>
-        <dt>Model #:</dt><dd>M100-A</dd>
-        <dt>Pallet Id:</dt><dd>P-00412</dd>
-        <dt>Pallet Qty / Claimed:</dt><dd>40 / 12</dd>
-        <dt>Unit Weight:</dt><dd>2.50</dd>
-        <dt>Packaging Mat. Wt:</dt><dd>18.0</dd>
-        <dt>Est. Skid Wt (no top):</dt><dd>118.0</dd>
+        <dt>Model #:</dt><dd>—</dd>
+        <dt>Pallet Id:</dt><dd>—</dd>
+        <dt>Pallet Qty / Claimed:</dt><dd>—</dd>
+        <dt>Unit Weight:</dt><dd>—</dd>
+        <dt>Packaging Mat. Wt:</dt><dd>—</dd>
+        <dt>Est. Skid Wt (no top):</dt><dd>—</dd>
         <dt>Actual Skid Weight:</dt><dd>—</dd>
-        <dt>Variance Allowed:</dt><dd>± 1.25</dd>
-        <dt>FAS Cell:</dt><dd>FAS-G1</dd>
+        <dt>Variance Allowed:</dt><dd>—</dd>
+        <dt>FAS Cell:</dt><dd>—</dd>
       </dl>
       <div class="btnrow"><button type="button">Print Labels</button></div>
       <p class="hint">Double-clicking a value jumps back to its step (SkipToCollectionStep).</p>
     </div>
 </div>
-<div class="note">IsPartialClaim resets to No on arrival at this step. Previous is <strong>disabled</strong> here in the Standard variation (helpdesk 84304, 7/3/2023). <a href="./branch-returnable-type.html">Multiple pallet-type options → Returnable Type.</a></div>
+<div class="note">Previous disabled on the first step (source: PrepareForm). Badge expiry re-routes here from any step.</div>
 <div class="navbtns">
 <a class="prev disabled">← Previous</a>
-<a class="next" href="05-skid-weight.html">Next →</a>
+<a class="next" href="02-part-number.html">Next →</a>
 </div>
 <footer class="src"><strong>Source grounding:</strong>
-<span class="mono">ref-code-20260904/UnitClaimingUI/UserControls/PalletQuantity.cs</span> (step panel) +
+<span class="mono">ref-code-20260904/UnitClaimingUI/UserControls/EmployeeAuthorization.cs</span> (step panel) +
 <span class="mono">UnitClaimingMainForm.cs PrepareForm/btnNext_Click</span> (nav rules) +
 <span class="mono">UnitClaimingMainFormController.DataCollectionSteps</span> (sequence).
 Wireframe only — inputs do not validate or save.</footer>

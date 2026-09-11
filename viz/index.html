@@ -114,6 +114,20 @@ flowchart TD
 <p><a href="./wizard/01-employee-auth.html">Start the Standard wizard walkthrough &rsaquo;</a>
 (Employee Auth &rarr; Part Number &rarr; Serial &rarr; Pallet Qty &rarr; Skid Weight &rarr; Complete).
 CSS mockups with Prev/Next wired per the real nav rules.</p>
+<h2>Wizard variation click-throughs</h2>
+<table>
+<thead><tr><th>Variation</th><th>Steps</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><a href="./wizard/01-employee-auth.html">Standard — Unit Claiming</a></td><td class="mono">6</td><td>Core flow; conditional license-plate + returnable-type branches linked from steps 2–4.</td></tr>
+<tr><td><a href="./wizard/reprint/01-employee-auth.html">Standard Reprint</a></td><td class="mono">3</td><td>History mode — nothing saved to the DB.</td></tr>
+<tr><td><a href="./wizard/boxlabel/01-employee-auth.html">Box Label</a></td><td class="mono">5</td><td>Quantity before serial.</td></tr>
+<tr><td><a href="./wizard/lowvolume/01-employee-auth.html">Low Volume Claiming</a></td><td class="mono">6</td><td>Includes conditional license-plate step.</td></tr>
+<tr><td><a href="./wizard/kit/01-employee-auth.html">Kit Claiming (All Plants)</a></td><td class="mono">5</td><td>FAS-cell resolution after part number.</td></tr>
+<tr><td><a href="./wizard/machine/01-employee-auth.html">Print Machine Number</a></td><td class="mono">3</td><td>Single-purpose label flow.</td></tr>
+<tr><td><a href="./wizard/location/01-employee-auth.html">Location Label (Princeton)</a></td><td class="mono">3</td><td>Single-purpose label flow.</td></tr>
+<tr><td><a href="./wizard/combo/01-employee-auth.html">Combo Skid</a></td><td class="mono">7</td><td>Two-skid loop; chain shows one skid pass.</td></tr>
+</tbody>
+</table>
 <h2>Screens</h2>
 <table>
 <thead><tr><th>Screen</th><th>Source</th><th>Inventory</th><th>Notes</th></tr></thead>
