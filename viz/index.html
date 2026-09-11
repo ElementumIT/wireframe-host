@@ -118,7 +118,7 @@ per-screen <span class="mono">.cs</span> / <span class="mono">.Designer.cs</span
 import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#0f5e8a', fontSize: '16px' } });
 const cv = document.getElementById('flow');
-let z = 1.6;
+let z = 3;
 function applyZ() {
   const svg = cv.querySelector('svg');
   if (svg) { svg.style.transform = `scale(${z})`; svg.style.transformOrigin = 'top left'; return true; }
@@ -128,7 +128,7 @@ let tries = 0;
 const ready = setInterval(() => { if (applyZ() || ++tries > 40) clearInterval(ready); }, 250);
 document.querySelectorAll('.zoom-controls button').forEach(b => b.addEventListener('click', () => {
   const k = b.dataset.z;
-  z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : 1.6;
+  z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : 3;
   applyZ();
 }));
 </script>
