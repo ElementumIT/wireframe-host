@@ -51,39 +51,8 @@
 <div class="note"><strong>Scope:</strong> UI understanding only. Control inventory parsed from
 <span class="mono">Configuration.Designer.cs</span> (29 controls). API / data-layer mapping deferred to wave 2.
 <!-- wave-2: api-layer --></div>
+<div class="note">Opens as a maximized MDI child of <span class="mono">MDIParent1</span> (prior child closed). Return via the crumb above.</div>
 <h2>Controls (29)</h2>
-<div class="cards">
-    <div class="ve-card"><h3>btnSave</h3><div class="ctype">Button</div><p>Save and Exit</p></div>
-    <div class="ve-card"><h3>cbAveryWeightTronix</h3><div class="ctype">CheckBox</div><p>Use Avery Weight-Tronix (Indianapolis)</p></div>
-    <div class="ve-card"><h3>cbAveryWeightTronixIP</h3><div class="ctype">CheckBox</div><p>Use Avery Weight-Tronix via IP (Indianapolis) 172.20.152.226 / 6671</p></div>
-    <div class="ve-card"><h3>cbAveryWeightTronixIPHuntingdon</h3><div class="ctype">CheckBox</div><p>Use Avery Weight-Tronix via IP (Huntingdon) 172.20.1.232.129 / 1702</p></div>
-    <div class="ve-card"><h3>cbAveryWeightTronixIPSullivan</h3><div class="ctype">CheckBox</div><p>Use Avery Weight-Tronix via IP (Sullivan) 172.20.1.88 / 1702</p></div>
-    <div class="ve-card"><h3>cbFirstClaimInShift</h3><div class="ctype">CheckBox</div><p>Disable First Claim in Shift Message</p></div>
-    <div class="ve-card"><h3>cbMettlerViaIP</h3><div class="ctype">CheckBox</div><p>Use Mettler Scale via IP (Princeton) 172.20.100.215 / 1702</p></div>
-    <div class="ve-card"><h3>cbPrintingDisabled</h3><div class="ctype">CheckBox</div><p>Printing Disabled</p></div>
-    <div class="ve-card"><h3>cbUseAveryWeightTronixIPGeneric</h3><div class="ctype">CheckBox</div><p>Use Avery Weight-Tronix via IP (Scale IP) / (Scale Port)</p></div>
-    <div class="ve-card"><h3>cbUseMettler</h3><div class="ctype">CheckBox</div><p>Use Mettler Scale Protocol (Sullivan HGX)</p></div>
-    <div class="ve-card"><h3>cbUseOptimaOP900</h3><div class="ctype">CheckBox</div><p>Use Optima OP-900 Protocol (Indianapolis)</p></div>
-    <div class="ve-card"><h3>ddPrinterOverride</h3><div class="ctype">ComboBox</div></div>
-    <div class="ve-card"><h3>gbIpConnectionInfo</h3><div class="ctype">GroupBox</div><p>IP Connection Info</p></div>
-    <div class="ve-card"><h3>gbPlantLocation</h3><div class="ctype">GroupBox</div><p>Plant Location</p></div>
-    <div class="ve-card"><h3>groupBox1</h3><div class="ctype">GroupBox</div><p>Printer Override</p></div>
-    <div class="ve-card"><h3>label1</h3><div class="ctype">Label</div><p>Read scale data from this COM port (COM1, COM2, etc):</p></div>
-    <div class="ve-card"><h3>label3</h3><div class="ctype">Label</div><p>Printer override - Always print to:</p></div>
-    <div class="ve-card"><h3>label4</h3><div class="ctype">Label</div><p>Leave this unselected unless you\&#x27;ve been instructed to set this.</p></div>
-    <div class="ve-card"><h3>label5</h3><div class="ctype">Label</div><p>IP:</p></div>
-    <div class="ve-card"><h3>label6</h3><div class="ctype">Label</div><p>Port:</p></div>
-    <div class="ve-card"><h3>label7</h3><div class="ctype">Label</div><p>Note that IP and Port must be set manually! Checkboxes above will not set these.</p></div>
-    <div class="ve-card"><h3>rbHuntingdon</h3><div class="ctype">RadioButton</div><p>Huntingdon</p></div>
-    <div class="ve-card"><h3>rbIndy</h3><div class="ctype">RadioButton</div><p>Indianapolis</p></div>
-    <div class="ve-card"><h3>rbPrinceton</h3><div class="ctype">RadioButton</div><p>Princeton</p></div>
-    <div class="ve-card"><h3>rbSullivan</h3><div class="ctype">RadioButton</div><p>Sullivan</p></div>
-    <div class="ve-card"><h3>tbComPort</h3><div class="ctype">TextBox</div></div>
-    <div class="ve-card"><h3>tbIpAddress</h3><div class="ctype">TextBox</div></div>
-    <div class="ve-card"><h3>tbPort</h3><div class="ctype">TextBox</div></div>
-    <div class="ve-card"><h3>textBox1</h3><div class="ctype">TextBox</div><p>Note: Use PuTTY to establish/test communication with scales via RS232 https://www</p></div>
-</div>
-<h2>Full inventory</h2>
 <table>
 <thead><tr><th>Name</th><th>Type</th><th>Label</th></tr></thead>
 <tbody>
@@ -118,9 +87,6 @@
       <tr><td class="mono">textBox1</td><td class="mono">TextBox</td><td>Note: Use PuTTY to establish/test communication with scales via RS232 https://www</td></tr>
 </tbody>
 </table>
-<h2>Navigation</h2>
-<p>Opened as an MDI child of <span class="mono">MDIParent1</span> (maximized, prior child closed).
-Return via the <a href="./index.html">viz index</a>.</p>
 <footer class="src"><strong>Source grounding:</strong>
 <span class="mono">ref-code-20260904/UnitClaimingUI/Configuration.cs</span> +
 <span class="mono">ref-code-20260904/UnitClaimingUI/Configuration.Designer.cs</span>.
