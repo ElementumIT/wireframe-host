@@ -61,6 +61,13 @@
   .btnrow { display: flex; gap: .6rem; margin-top: .8rem; flex-wrap: wrap; }
   .btnrow button { padding: .55rem 1.1rem; border-radius: .4rem; border: 2px solid var(--primary);
     background: var(--surface); color: var(--primary); font-weight: 600; cursor: pointer; }
+  .diagram-shell { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem; margin: 1rem 0; }
+  .mermaid-wrap { position: relative; }
+  .zoom-controls { display: flex; gap: .4rem; margin-bottom: .5rem; }
+  .zoom-controls button { font-size: .8rem; padding: .25rem .6rem; cursor: pointer; }
+  .mermaid-viewport { overflow: auto; max-height: 24rem; border: 1px solid var(--border); border-radius: .4rem; }
+  .mermaid-canvas { min-height: 6rem; padding: .5rem; }
+  .mermaid-canvas svg { max-width: none !important; }
 </style>
 </head>
 <body>
@@ -71,6 +78,27 @@
 <div class="steps">
 <a class="done" href="01-employee-auth.html">1. Employee Auth</a><a class="done" href="02-part-number.html">2. Part Number</a><a class="done" href="03-license-plate.html">3. License Plate*</a><a class="done" href="04-serial-number.html">4. Serial Number</a><a class="done" href="05-pallet-quantity.html">5. Pallet Qty</a><span class="cur">6. Complete</span>
 </div>
+<div class="diagram-shell"><div class="mermaid-wrap">
+<div class="zoom-controls"><button data-z="in">+</button><button data-z="out">&minus;</button><button data-z="reset">reset</button></div>
+<div class="mermaid-viewport"><div class="mermaid-canvas flowmini">
+<pre class="mermaid">
+flowchart LR
+    T1[Employee Auth]
+    T2[Part Number]
+    T3[License Plate*]
+    T4[Serial Number]
+    T5[Pallet Qty]
+    T6[Complete]
+    T1 --> T2 --> T3 --> T4 --> T5 --> T6
+    style T6 fill:#0f5e8a,color:#fff
+    click T1 "./01-employee-auth.html" "Open step"
+    click T2 "./02-part-number.html" "Open step"
+    click T3 "./03-license-plate.html" "Open step"
+    click T4 "./04-serial-number.html" "Open step"
+    click T5 "./05-pallet-quantity.html" "Open step"
+    click T6 "./06-skid-complete.html" "Open step"
+</pre>
+</div></div></div></div>
 <div class="mock">
 
     <div class="panel"><h2>Skid complete</h2>
@@ -105,5 +133,24 @@
 <span class="mono">UnitClaimingMainForm.cs PrepareForm/btnNext_Click</span> (nav rules) +
 <span class="mono">UnitClaimingMainFormController.DataCollectionSteps</span> (sequence).
 Wireframe only — inputs do not validate or save.</footer>
+<script type="importmap">{"imports": {"mermaid": "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"}}</script>
+<script type="module">
+import mermaid from 'mermaid';
+mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#0f5e8a', fontSize: '15px' } });
+document.querySelectorAll('.flowmini').forEach(cv => {
+  let z = 1.2, tries = 0;
+  const apply = () => {
+    const svg = cv.querySelector('svg');
+    if (svg) { svg.style.transform = `scale(${z})`; svg.style.transformOrigin = 'top left'; return true; }
+    return false;
+  };
+  const ready = setInterval(() => { if (apply() || ++tries > 40) clearInterval(ready); }, 250);
+  cv.closest('.mermaid-wrap').querySelectorAll('.zoom-controls button').forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.z;
+    z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : 1.2;
+    apply();
+  }));
+});
+</script>
 </body>
 </html>
