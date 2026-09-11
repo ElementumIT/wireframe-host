@@ -46,7 +46,7 @@
   .mermaid-wrap { position: relative; }
   .zoom-controls { display: flex; gap: .4rem; margin-bottom: .5rem; }
   .zoom-controls button { font-size: .8rem; padding: .25rem .6rem; cursor: pointer; }
-  .mermaid-viewport { overflow: auto; max-height: 32rem; border: 1px solid var(--border); border-radius: .4rem; }
+  .mermaid-viewport { overflow: auto; max-height: 96rem; min-height: 40rem; border: 1px solid var(--border); border-radius: .4rem; }
   .mermaid-canvas { min-height: 12rem; padding: 1rem; }
   .mermaid-canvas svg { max-width: none !important; }
 </style>
@@ -61,7 +61,7 @@ Nav map driven by <span class="mono">MDIParent1.Show*</span> methods. Wave 1 cov
 <!-- wave-2: api-layer --></p>
 <h2>App flow</h2>
 <div class="diagram-shell"><div class="mermaid-wrap">
-<div class="zoom-controls"><button data-z="in">+</button><button data-z="out">&minus;</button><button data-z="reset">reset</button></div>
+<div class="zoom-controls"><button data-z="in">+</button><button data-z="out">&minus;</button><button data-z="reset">reset</button><span style="font-size:.8rem;color:var(--text-dim);align-self:center;">scroll inside the frame to explore</span></div>
 <div class="mermaid-viewport"><div class="mermaid-canvas" id="flow">
 <pre class="mermaid">
 flowchart TD
@@ -90,9 +90,6 @@ flowchart TD
     MDI -->|disabled menu hook| xxEditPackagingData
 </pre>
 </div></div></div></div>
-<h2>Standard wizard click-through</h2>
-<p><a href="./wizard/01-employee-auth.html">Start the Standard wizard walkthrough &rsaquo;</a>
-(Employee Auth &rarr; Part Number &rarr; Serial &rarr; Pallet Qty &rarr; Skid Weight &rarr; Complete). CSS mockups with Prev/Next wired per the real nav rules.</p>
 <h2>Screens</h2>
 <table>
 <thead><tr><th>Screen</th><th>Source</th><th>Inventory</th><th>Notes</th></tr></thead>
@@ -117,13 +114,18 @@ per-screen <span class="mono">.cs</span> / <span class="mono">.Designer.cs</span
 import mermaid from 'mermaid';
 mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#0f5e8a', fontSize: '16px' } });
 const cv = document.getElementById('flow');
-let z = 1;
+let z = 1.6;
+function applyZ() {
+  const svg = cv.querySelector('svg');
+  if (svg) { svg.style.transform = `scale(${z})`; svg.style.transformOrigin = 'top left'; return true; }
+  return false;
+}
+let tries = 0;
+const ready = setInterval(() => { if (applyZ() || ++tries > 40) clearInterval(ready); }, 250);
 document.querySelectorAll('.zoom-controls button').forEach(b => b.addEventListener('click', () => {
   const k = b.dataset.z;
-  z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : 1;
-  const svg = cv.querySelector('svg');
-  if (svg) svg.style.transform = `scale(${z})`;
-  if (svg) svg.style.transformOrigin = 'top left';
+  z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : 1.6;
+  applyZ();
 }));
 </script>
 </body>
