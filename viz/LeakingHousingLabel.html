@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeakingHousingLabel — Unit Claiming viz wireframe</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3EV%3C/text%3E%3C/svg%3E">
+<style>
+  html { font-size: 16px; }
+  :root {
+    --bg: #f4f1ea; --surface: #ffffff; --border: rgba(20,40,70,.12);
+    --text: #1c2b3a; --text-dim: #5b6b7c;
+    --primary: #0f5e8a; --primary-dim: rgba(15,94,138,.08);
+    --accent: #b3541e; --ok: #1e7e46; --mono: 'Fragment Mono','SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101820; --surface: #182430; --border: rgba(255,255,255,.1);
+      --text: #dbe7f0; --text-dim: #8fa3b5;
+      --primary: #4fb0e0; --primary-dim: rgba(79,176,224,.14);
+      --accent: #e09a4f; --ok: #4fce7f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+         max-width: 68rem; margin: 0 auto; padding: 2rem 1.5rem; line-height: 1.55; font-size: 1rem; }
+  h1 { font-size: 1.9rem; text-wrap: balance; margin: 0 0 .25rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .75rem; border-bottom: 2px solid var(--primary); padding-bottom: .3rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--text-dim); }
+  nav.crumb { margin-bottom: 1.5rem; font-size: .9rem; }
+  nav.crumb a { color: var(--primary); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+  .ve-card { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem 1.1rem; }
+  .ve-card h3 { margin: 0 0 .4rem; font-size: 1rem; }
+  .ve-card .ctype { font-family: var(--mono); font-size: .75rem; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: .92rem; }
+  th, td { text-align: left; padding: .55rem .7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-dim); }
+  td.mono, .mono { font-family: var(--mono); font-size: .82rem; }
+  footer.src { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+               font-size: .85rem; color: var(--text-dim); }
+  .note { background: var(--primary-dim); border-left: 4px solid var(--primary);
+          padding: .7rem 1rem; border-radius: 0 .5rem .5rem 0; margin: .6rem 0; }
+</style>
+</head>
+<body>
+<nav class="crumb"><a href="./index.html">viz index</a> &rsaquo; LeakingHousingLabel</nav>
+<div class="eyebrow">Unit Claiming &middot; wave-1 UI wireframe (branch experiment)</div>
+<h1>LeakingHousingLabel</h1>
+<p>HGP leaking-housing label print flow.</p>
+<div class="note"><strong>Scope:</strong> UI understanding only. Control inventory parsed from
+<span class="mono">LeakingHousingLabel.Designer.cs</span> (23 controls). API / data-layer mapping deferred to wave 2.
+<!-- wave-2: api-layer --></div>
+<div class="note">Opens as a maximized MDI child of <span class="mono">MDIParent1</span> (prior child closed). Return via the crumb above.</div>
+<h2>Controls (23)</h2>
+<table>
+<thead><tr><th>Name</th><th>Type</th><th>Label</th></tr></thead>
+<tbody>
+      <tr><td class="mono">btnNext</td><td class="mono">Button</td><td>Next</td></tr>
+      <tr><td class="mono">btnPrevious</td><td class="mono">Button</td><td>Previous</td></tr>
+      <tr><td class="mono">btnPrint</td><td class="mono">Button</td><td>Print Label</td></tr>
+      <tr><td class="mono">errorProvider1</td><td class="mono">ErrorProvider</td><td></td></tr>
+      <tr><td class="mono">label11</td><td class="mono">Label</td><td>Scan Quantity:</td></tr>
+      <tr><td class="mono">label2</td><td class="mono">Label</td><td>Scan Employee Number:</td></tr>
+      <tr><td class="mono">label3</td><td class="mono">Label</td><td>Employee Badge #:</td></tr>
+      <tr><td class="mono">label4</td><td class="mono">Label</td><td>Model #:</td></tr>
+      <tr><td class="mono">label5</td><td class="mono">Label</td><td>Pallet Qty:</td></tr>
+      <tr><td class="mono">label7</td><td class="mono">Label</td><td>Hit the Print Label button to print</td></tr>
+      <tr><td class="mono">label8</td><td class="mono">Label</td><td>Scan Part Number:</td></tr>
+      <tr><td class="mono">lblEmployee</td><td class="mono">Label</td><td>lblEmployee</td></tr>
+      <tr><td class="mono">lblModel</td><td class="mono">Label</td><td>lblModel</td></tr>
+      <tr><td class="mono">lblPalletQty</td><td class="mono">Label</td><td>lblPalletQty</td></tr>
+      <tr><td class="mono">pnlComplete</td><td class="mono">Panel</td><td></td></tr>
+      <tr><td class="mono">pnlEmployeeNumber</td><td class="mono">Panel</td><td></td></tr>
+      <tr><td class="mono">pnlMain</td><td class="mono">Panel</td><td></td></tr>
+      <tr><td class="mono">pnlModelNumber</td><td class="mono">Panel</td><td></td></tr>
+      <tr><td class="mono">pnlQty</td><td class="mono">Panel</td><td></td></tr>
+      <tr><td class="mono">tbEmployeeNumber</td><td class="mono">TextBox</td><td></td></tr>
+      <tr><td class="mono">tbError</td><td class="mono">TextBox</td><td></td></tr>
+      <tr><td class="mono">tbModelNumber</td><td class="mono">TextBox</td><td></td></tr>
+      <tr><td class="mono">tbQty</td><td class="mono">TextBox</td><td></td></tr>
+</tbody>
+</table>
+<footer class="src"><strong>Source grounding:</strong>
+<span class="mono">ref-code-20260904/UnitClaimingUI/LeakingHousingLabel.cs</span> +
+<span class="mono">ref-code-20260904/UnitClaimingUI/LeakingHousingLabel.Designer.cs</span>.
+Designer inventory is authoritative for fields; behavior notes verified against the <span class="mono">.cs</span> code-behind.</footer>
+</body>
+</html>
