@@ -42,6 +42,11 @@
   .note { background: var(--primary-dim); border-left: 4px solid var(--primary);
           padding: .7rem 1rem; border-radius: 0 .5rem .5rem 0; margin: .6rem 0; }
 
+  .hero { background: var(--surface); border: 2px solid var(--primary); border-radius: .8rem;
+    padding: 2rem 1.5rem; margin: 1.5rem 0; text-align: center; }
+  .hero h2 { border: none; margin: 0 0 .5rem; font-size: 1.5rem; }
+  .hero .cta { display: inline-block; margin-top: 1rem; padding: .8rem 2rem; border-radius: .5rem;
+    background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
   .diagram-shell { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem; }
   .mermaid-wrap { position: relative; }
   .zoom-controls { display: flex; gap: .4rem; margin-bottom: .5rem; }
@@ -50,73 +55,24 @@
   .mermaid-canvas { min-height: 12rem; padding: 1rem; }
   .mermaid-canvas svg { max-width: none !important; }
 </style>
-<script type="importmap">{"imports": {"mermaid": "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"}}</script>
 </head>
 <body>
 <nav class="crumb"><a href="../index.html">wireframe-host gallery</a> &rsaquo; viz</nav>
 <div class="eyebrow">Unit Claiming &middot; wave-1 UI wireframe (branch experiment)</div>
 <h1>Unit Claiming — wireframe overview</h1>
 <p>Branch-experiment rebuild of the legacy WinForms UI as self-contained wireframe pages.
-Nav map driven by <span class="mono">MDIParent1.Show*</span> methods. Wave 1 covers UI only; API mapping deferred.
+Wave 1 covers UI only; API mapping deferred.
 <!-- wave-2: api-layer --></p>
-<h2>App flow</h2>
-<div class="diagram-shell"><div class="mermaid-wrap">
-<div class="zoom-controls"><button data-z="in">+</button><button data-z="out">&minus;</button><button data-z="reset">reset</button><span style="font-size:.8rem;color:var(--text-dim);align-self:center;">scroll inside the frame to explore</span></div>
-<div class="mermaid-viewport"><div class="mermaid-canvas" id="flow">
-<pre class="mermaid">
-flowchart TD
-    MDI[MDIParent1 shell]
-    MainMenu[MainMenu]
-    UnitClaimingMainForm[UnitClaimingMainForm]
-    Configuration[Configuration]
-    ViewUnitClaimingData[ViewUnitClaimingData]
-    ViewUnitClaimingDataPopup[ViewUnitClaimingDataPopup]
-    ImportFromMTMS[ImportFromMTMS]
-    LeakingHousingLabel[LeakingHousingLabel]
-    WashedLeakTestedLabel[WashedLeakTestedLabel]
-    SetToleranceFactor[SetToleranceFactor]
-    ErrorDetail[ErrorDetail]
-    xxEditPackagingData[xxEditPackagingData]
-    MDI -->|startup: loads| MainMenu
-    MDI -->|claiming buttons| UnitClaimingMainForm
-    MDI -->|btnWashedLeakTested| WashedLeakTestedLabel
-    MDI -->|btnLeakingHousingLabel| LeakingHousingLabel
-    MDI -->|menu: View Data| ViewUnitClaimingData
-    MDI -->|menu: Import Units from MTMS| ImportFromMTMS
-    MDI -->|menu: Configure| Configuration
-    MDI -->|row detail| ViewUnitClaimingDataPopup
-    MDI -->|various callers| SetToleranceFactor
-    MDI -->|error path| ErrorDetail
-    MDI -->|disabled menu hook| xxEditPackagingData
-
-    subgraph StandardWizard[Standard wizard steps]
-    direction LR
-    S1[1 Employee Auth]
-    S2[2 Part Number]
-    S3[3 Serial Number]
-    S4[4 Pallet Quantity]
-    S5[5 Skid Weight]
-    S6[6 Skid Complete]
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6
-    end
-    UnitClaimingMainForm -->|Standard variation| S1
-
-    click S1 "./wizard/01-employee-auth.html" "Open step mockup"
-    click S2 "./wizard/02-part-number.html" "Open step mockup"
-    click S3 "./wizard/03-serial-number.html" "Open step mockup"
-    click S4 "./wizard/04-pallet-quantity.html" "Open step mockup"
-    click S5 "./wizard/05-skid-weight.html" "Open step mockup"
-    click S6 "./wizard/06-skid-complete.html" "Open step mockup"
-    
-</pre>
-</div></div></div></div>
+<div class="hero">
+<h2>Start here: the Main Menu</h2>
+<p>Every flow in this spec opens from the app front door — click any button.</p>
+<a class="cta" href="./wizard/main-menu.html">Open the Main Menu &rsaquo;</a>
+</div>
 <h2>Standard wizard click-through</h2>
 <p><a href="./wizard/01-employee-auth.html">Start the Standard wizard walkthrough &rsaquo;</a>
 (Employee Auth &rarr; Part Number &rarr; Serial &rarr; Pallet Qty &rarr; Skid Weight &rarr; Complete).
 CSS mockups with Prev/Next wired per the real nav rules.</p>
-<h2>Wizard walkthroughs</h2>
-<p><a href="./wizard/main-menu.html">Open the Main Menu &rsaquo;</a>
-Every button opens its flow — the same entry point as the legacy app.</p>
+<h2>Wizard variation click-throughs</h2>
 <table>
 <thead><tr><th>Variation</th><th>Steps</th><th>Notes</th></tr></thead>
 <tbody>
@@ -144,7 +100,7 @@ Every button opens its flow — the same entry point as the legacy app.</p>
 <tr><td><a href="./screens/edit-packaging.html">Edit Packaging Data (unreachable)</a></td><td>Dead editor, documented for conversion.</td></tr>
 </tbody>
 </table>
-<h2>Screens</h2>
+<h2>Screen inventory</h2>
 <table>
 <thead><tr><th>Screen</th><th>Source</th><th>Inventory</th><th>Notes</th></tr></thead>
 <tbody>
@@ -164,24 +120,5 @@ Every button opens its flow — the same entry point as the legacy app.</p>
 <footer class="src"><strong>Source grounding:</strong>
 <span class="mono">ref-code-20260904/UnitClaimingUI/MDIParent1.cs</span> (Show* nav map) +
 per-screen <span class="mono">.cs</span> / <span class="mono">.Designer.cs</span>. Existing excalidraw gallery untouched.</footer>
-<script type="module">
-import mermaid from 'mermaid';
-mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#0f5e8a', fontSize: '16px' } });
-document.querySelectorAll('.mermaid-canvas').forEach(cv => {
-  const base = cv.id === 'flow' ? 3 : 1.4;
-  let z = base, tries = 0;
-  const apply = () => {
-    const svg = cv.querySelector('svg');
-    if (svg) { svg.style.transform = `scale(${z})`; svg.style.transformOrigin = 'top left'; return true; }
-    return false;
-  };
-  const ready = setInterval(() => { if (apply() || ++tries > 40) clearInterval(ready); }, 250);
-  cv.closest('.mermaid-wrap').querySelectorAll('.zoom-controls button').forEach(b => b.addEventListener('click', () => {
-    const k = b.dataset.z;
-    z = k === 'in' ? Math.min(z + .2, 3) : k === 'out' ? Math.max(z - .2, .4) : base;
-    apply();
-  }));
-});
-</script>
 </body>
 </html>
