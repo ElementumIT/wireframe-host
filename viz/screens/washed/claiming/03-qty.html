@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Complete — Washed/Leak Tested Label (3 / 3)</title>
+<title>Qty — Washed/Leak Tested (Claiming) (3 / 4)</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3ES%3C/text%3E%3C/svg%3E">
 <style>  html { font-size: 16px; }
   :root {
@@ -70,17 +70,18 @@
 </style>
 </head>
 <body>
-<nav class="crumb"><a href="../../index.html">viz index</a> &rsaquo; Washed/Leak Tested Label</nav>
-<div class="eyebrow">Unit Claiming &middot; Washed/Leak Tested Label &middot; step 3 / 3</div>
-<h1>Step 3 — Complete</h1>
-<p>Washed/leak-tested label flow. FormVersion selects normal vs reprint.</p>
+<nav class="crumb"><a href="../../../index.html">viz index</a> &rsaquo; Washed/Leak Tested (Claiming)</nav>
+<div class="eyebrow">Unit Claiming &middot; Washed/Leak Tested (Claiming) &middot; step 3 / 4</div>
+<h1>Step 3 — Qty</h1>
+<p>Claiming flow: Employee → Serial → Qty → Complete.</p>
 <div class="steps">
-<a class="done" href="01-employee.html">1. Employee</a><a class="done" href="02-serial.html">2. Serial</a><span class="cur">3. Complete</span>
+<a class="done" href="01-employee.html">1. Employee</a><a class="done" href="02-serial.html">2. Serial</a><span class="cur">3. Qty</span><a class="done" href="04-complete.html">4. Complete</a>
 </div>
 <div class="mock">
 
-    <div class="panel"><h2>Done</h2>
-      <p><strong>Hit the Print Label button to print.</strong></p>
+    <div class="panel"><h2>Confirm quantity</h2>
+      <div class="field"><label>Quantity (tbQty, prefilled with the claimed qty)</label><input type="text" value="40"></div>
+      <div class="note">Enter accepts here (AcceptButton = Next).</div>
     </div>
 
     <div class="panel"><h2>Label preview (live)</h2>
@@ -90,10 +91,10 @@
       <div class="btnrow"><button type="button">Print Label</button></div>
     </div>
 </div>
-<div class="note">Hit the Print Label button to print.</div>
+<div class="note">Claiming-only step: confirm the claimed quantity before completion.</div>
 <div class="navbtns">
 <a class="prev" href="02-serial.html">← Previous</a>
-<a class="next" href="01-employee.html">Print another →</a>
+<a class="next" href="04-complete.html">Next →</a>
 </div>
 <footer class="src"><strong>Source grounding:</strong> <span class="mono">ref-code-20260904/UnitClaimingUI/WashedLeakTestedLabel.cs</span>. Wireframe only — inputs do not save.</footer>
 
