@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ViewUnitClaimingData — Unit Claiming viz wireframe</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3EV%3C/text%3E%3C/svg%3E">
+<style>
+  html { font-size: 16px; }
+  :root {
+    --bg: #f4f1ea; --surface: #ffffff; --border: rgba(20,40,70,.12);
+    --text: #1c2b3a; --text-dim: #5b6b7c;
+    --primary: #0f5e8a; --primary-dim: rgba(15,94,138,.08);
+    --accent: #b3541e; --ok: #1e7e46; --mono: 'Fragment Mono','SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101820; --surface: #182430; --border: rgba(255,255,255,.1);
+      --text: #dbe7f0; --text-dim: #8fa3b5;
+      --primary: #4fb0e0; --primary-dim: rgba(79,176,224,.14);
+      --accent: #e09a4f; --ok: #4fce7f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+         max-width: 68rem; margin: 0 auto; padding: 2rem 1.5rem; line-height: 1.55; font-size: 1rem; }
+  h1 { font-size: 1.9rem; text-wrap: balance; margin: 0 0 .25rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .75rem; border-bottom: 2px solid var(--primary); padding-bottom: .3rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--text-dim); }
+  nav.crumb { margin-bottom: 1.5rem; font-size: .9rem; }
+  nav.crumb a { color: var(--primary); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 1rem; }
+  .ve-card { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem 1.1rem; }
+  .ve-card h3 { margin: 0 0 .4rem; font-size: 1rem; }
+  .ve-card .ctype { font-family: var(--mono); font-size: .75rem; color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: .92rem; }
+  th, td { text-align: left; padding: .55rem .7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-dim); }
+  td.mono, .mono { font-family: var(--mono); font-size: .82rem; }
+  footer.src { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+               font-size: .85rem; color: var(--text-dim); }
+  .note { background: var(--primary-dim); border-left: 4px solid var(--primary);
+          padding: .7rem 1rem; border-radius: 0 .5rem .5rem 0; margin: .6rem 0; }
+</style>
+</head>
+<body>
+<nav class="crumb"><a href="./index.html">viz index</a> &rsaquo; ViewUnitClaimingData</nav>
+<div class="eyebrow">Unit Claiming &middot; wave-1 UI wireframe (branch experiment)</div>
+<h1>ViewUnitClaimingData</h1>
+<p>Grid view of claimed-unit data (menu: View Data). Default sort CreatedDate descending.</p>
+<div class="note"><strong>Scope:</strong> UI understanding only. Control inventory parsed from
+<span class="mono">ViewUnitClaimingData.Designer.cs</span> (32 controls). API / data-layer mapping deferred to wave 2.
+<!-- wave-2: api-layer --></div>
+<h2>Controls (32)</h2>
+<div class="cards">
+    <div class="ve-card"><h3>ClaimedQuantity</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>CreatedDate</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>EmployeeNumber</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>FASCell</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>FromAppLogic</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>IsCombo</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>IsProductMonitoringUnit</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>ModelNumber</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>PlantLocation</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>ScannedSerialNumber</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>SendToMTMS</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>SkidId</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>SkidQuantity</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>SkidWeight</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>UnitClaimingSkidId</h3><div class="ctype">DataGridViewTextBoxColumn</div></div>
+    <div class="ve-card"><h3>btnEditQty</h3><div class="ctype">Button</div><p>Edit Claimed Qty</p></div>
+    <div class="ve-card"><h3>btnFirstPage</h3><div class="ctype">Button</div><p>|&lt;</p></div>
+    <div class="ve-card"><h3>btnLastPage</h3><div class="ctype">Button</div><p>&gt;|</p></div>
+    <div class="ve-card"><h3>btnNextPage</h3><div class="ctype">Button</div><p>&gt;</p></div>
+    <div class="ve-card"><h3>btnPreviousPage</h3><div class="ctype">Button</div><p>&lt;</p></div>
+    <div class="ve-card"><h3>cbHuntingdon</h3><div class="ctype">CheckBox</div><p>Huntingdon</p></div>
+    <div class="ve-card"><h3>cbIndy</h3><div class="ctype">CheckBox</div><p>Indianapolis</p></div>
+    <div class="ve-card"><h3>cbPrinceton</h3><div class="ctype">CheckBox</div><p>Princeton</p></div>
+    <div class="ve-card"><h3>cbSullivan</h3><div class="ctype">CheckBox</div><p>Sullivan</p></div>
+    <div class="ve-card"><h3>dgSkids</h3><div class="ctype">DataGridView</div></div>
+    <div class="ve-card"><h3>errorProvider1</h3><div class="ctype">ErrorProvider</div></div>
+    <div class="ve-card"><h3>label1</h3><div class="ctype">Label</div><p>Plant Location:</p></div>
+    <div class="ve-card"><h3>label2</h3><div class="ctype">Label</div><p>Claimed but not yet imported into MTMS</p></div>
+    <div class="ve-card"><h3>label3</h3><div class="ctype">Label</div></div>
+    <div class="ve-card"><h3>lblError</h3><div class="ctype">Label</div></div>
+    <div class="ve-card"><h3>lblPage</h3><div class="ctype">Label</div><p>Page 1 of 1</p></div>
+    <div class="ve-card"><h3>panel1</h3><div class="ctype">Panel</div></div>
+</div>
+<h2>Full inventory</h2>
+<table>
+<thead><tr><th>Name</th><th>Type</th><th>Label</th></tr></thead>
+<tbody>
+      <tr><td class="mono">ClaimedQuantity</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">CreatedDate</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">EmployeeNumber</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">FASCell</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">FromAppLogic</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">IsCombo</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">IsProductMonitoringUnit</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">ModelNumber</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">PlantLocation</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">ScannedSerialNumber</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">SendToMTMS</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">SkidId</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">SkidQuantity</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">SkidWeight</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">UnitClaimingSkidId</td><td class="mono">DataGridViewTextBoxColumn</td><td></td></tr>
+      <tr><td class="mono">btnEditQty</td><td class="mono">Button</td><td>Edit Claimed Qty</td></tr>
+      <tr><td class="mono">btnFirstPage</td><td class="mono">Button</td><td>|&lt;</td></tr>
+      <tr><td class="mono">btnLastPage</td><td class="mono">Button</td><td>&gt;|</td></tr>
+      <tr><td class="mono">btnNextPage</td><td class="mono">Button</td><td>&gt;</td></tr>
+      <tr><td class="mono">btnPreviousPage</td><td class="mono">Button</td><td>&lt;</td></tr>
+      <tr><td class="mono">cbHuntingdon</td><td class="mono">CheckBox</td><td>Huntingdon</td></tr>
+      <tr><td class="mono">cbIndy</td><td class="mono">CheckBox</td><td>Indianapolis</td></tr>
+      <tr><td class="mono">cbPrinceton</td><td class="mono">CheckBox</td><td>Princeton</td></tr>
+      <tr><td class="mono">cbSullivan</td><td class="mono">CheckBox</td><td>Sullivan</td></tr>
+      <tr><td class="mono">dgSkids</td><td class="mono">DataGridView</td><td></td></tr>
+      <tr><td class="mono">errorProvider1</td><td class="mono">ErrorProvider</td><td></td></tr>
+      <tr><td class="mono">label1</td><td class="mono">Label</td><td>Plant Location:</td></tr>
+      <tr><td class="mono">label2</td><td class="mono">Label</td><td>Claimed but not yet imported into MTMS</td></tr>
+      <tr><td class="mono">label3</td><td class="mono">Label</td><td></td></tr>
+      <tr><td class="mono">lblError</td><td class="mono">Label</td><td></td></tr>
+      <tr><td class="mono">lblPage</td><td class="mono">Label</td><td>Page 1 of 1</td></tr>
+      <tr><td class="mono">panel1</td><td class="mono">Panel</td><td></td></tr>
+</tbody>
+</table>
+<h2>Navigation</h2>
+<p>Opened as an MDI child of <span class="mono">MDIParent1</span> (maximized, prior child closed).
+Return via the <a href="./index.html">viz index</a>.</p>
+<footer class="src"><strong>Source grounding:</strong>
+<span class="mono">ref-code-20260904/UnitClaimingUI/ViewUnitClaimingData.cs</span> +
+<span class="mono">ref-code-20260904/UnitClaimingUI/ViewUnitClaimingData.Designer.cs</span>.
+Designer inventory is authoritative for fields; behavior notes verified against the <span class="mono">.cs</span> code-behind.</footer>
+</body>
+</html>
