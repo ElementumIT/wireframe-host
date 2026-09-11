@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Main Menu — wizard hub</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+  html { font-size: 16px; }
+  :root {
+    --bg: #f4f1ea; --surface: #ffffff; --border: rgba(20,40,70,.12);
+    --text: #1c2b3a; --text-dim: #5b6b7c;
+    --primary: #0f5e8a; --primary-dim: rgba(15,94,138,.08);
+    --accent: #b3541e; --ok: #1e7e46;
+    --mono: 'Fragment Mono','SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101820; --surface: #182430; --border: rgba(255,255,255,.1);
+      --text: #dbe7f0; --text-dim: #8fa3b5;
+      --primary: #4fb0e0; --primary-dim: rgba(79,176,224,.14);
+      --accent: #e09a4f; --ok: #4fce7f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+         max-width: 72rem; margin: 0 auto; padding: 2rem 1.5rem; font-size: 1rem; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--text-dim); }
+  nav.crumb { margin-bottom: 1.25rem; font-size: .9rem; }
+  nav.crumb a { color: var(--primary); }
+  .steps { display: flex; gap: .4rem; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+  .steps a, .steps span { padding: .35rem .7rem; border: 1px solid var(--border); border-radius: 2rem;
+    font-size: .8rem; text-decoration: none; color: var(--text-dim); background: var(--surface); }
+  .steps .cur { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 600; }
+  .steps .done { color: var(--primary); border-color: var(--primary); }
+  .mock { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem; }
+  @media (max-width: 60rem) { .mock { grid-template-columns: 1fr; } }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1.25rem 1.4rem; }
+  .panel h2 { font-size: 1.15rem; margin: 0 0 .8rem; border-bottom: 2px solid var(--primary); padding-bottom: .35rem; }
+  .field { margin: .8rem 0; }
+  .field label { display: block; font-size: .85rem; color: var(--text-dim); margin-bottom: .3rem; }
+  .field input[type=text] { width: 100%; font-size: 1.1rem; padding: .55rem .7rem;
+    border: 2px solid var(--primary); border-radius: .4rem; background: var(--bg); color: var(--text); }
+  .field select { width: 100%; font-size: 1.05rem; padding: .55rem .7rem;
+    border: 2px solid var(--primary); border-radius: .4rem; background: var(--bg); color: var(--text); }
+  .sample { border: 1px dashed var(--border); border-radius: .4rem; padding: .6rem .8rem; margin-top: .8rem; font-size: .85rem; }
+  .sample .mono { font-family: var(--mono); }
+  .hint { font-size: .82rem; color: var(--text-dim); margin-top: .5rem; }
+  .summary { display: grid; grid-template-columns: auto 1fr; gap: .35rem .9rem; font-size: .9rem; }
+  .summary dt { color: var(--text-dim); } .summary dd { margin: 0; font-family: var(--mono); font-size: .85rem; }
+  .navbtns { display: flex; gap: .8rem; margin-top: 1.5rem; }
+  .navbtns a { padding: .7rem 1.6rem; border-radius: .45rem; text-decoration: none; font-weight: 600; }
+  .prev { border: 2px solid var(--primary); color: var(--primary); }
+  .next { background: var(--primary); color: #fff; }
+  .disabled { opacity: .35; pointer-events: none; }
+  .note { background: var(--primary-dim); border-left: 4px solid var(--primary);
+          padding: .7rem 1rem; border-radius: 0 .5rem .5rem 0; margin: .8rem 0; font-size: .9rem; }
+  footer.src { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);
+               font-size: .82rem; color: var(--text-dim); }
+  .btnrow { display: flex; gap: .6rem; margin-top: .8rem; flex-wrap: wrap; }
+  .btnrow button { padding: .55rem 1.1rem; border-radius: .4rem; border: 2px solid var(--primary);
+    background: var(--surface); color: var(--primary); font-weight: 600; cursor: pointer; }
+  .diagram-shell { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem; margin: 1rem 0; }
+  .mermaid-wrap { position: relative; }
+  .zoom-controls { display: flex; gap: .4rem; margin-bottom: .5rem; }
+  .zoom-controls button { font-size: .8rem; padding: .25rem .6rem; cursor: pointer; }
+  .mermaid-viewport { overflow: auto; max-height: 24rem; border: 1px solid var(--border); border-radius: .4rem; }
+  .mermaid-canvas { min-height: 6rem; padding: .5rem; }
+  .mermaid-canvas svg { max-width: none !important; }
+
+  .menustrip { display: flex; gap: 0; background: var(--surface); border: 1px solid var(--border);
+    border-radius: .5rem; overflow: hidden; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .menustrip a { padding: .6rem 1.1rem; text-decoration: none; color: var(--text); font-size: .9rem;
+    border-right: 1px solid var(--border); }
+  .menustrip a:hover { background: var(--primary-dim); }
+  .btngrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .8rem; }
+  .mbtn { display: block; padding: 1rem; text-align: center; background: var(--primary); color: #fff;
+    border-radius: .5rem; text-decoration: none; font-weight: 600; }
+  .mbtn.off { background: var(--surface); color: var(--text-dim); border: 2px dashed var(--border);
+    pointer-events: none; }
+  .washed { border: 2px solid var(--border); border-radius: .6rem; padding: 1rem; margin-top: 1rem; }
+  .washed h3 { margin: 0 0 .2rem; font-size: .95rem; color: var(--text-dim); }
+</style>
+</head>
+<body>
+<nav class="crumb"><a href="../index.html">viz index</a> &rsaquo; Main Menu</nav>
+<div class="eyebrow">Unit Claiming &middot; main menu (entry point)</div>
+<h1>Main Menu</h1>
+<p>Opened at startup via <span class="mono">ShowMainMenu</span>. Every button below opens its flow — click through.</p>
+<div class="menustrip">
+<a href="../ViewUnitClaimingData.html">View Data</a>
+<a href="../ImportFromMTMS.html">Import Units from MTMS</a>
+<a href="../Configuration.html">Configure</a>
+</div>
+<div class="btngrid">
+<a class="mbtn" href="./01-employee-auth.html">Unit Claiming</a>
+<a class="mbtn" href="./lowvolume/01-employee-auth.html">Low Volume Claiming</a>
+<a class="mbtn" href="./boxlabel/01-employee-auth.html">Box Label</a>
+<a class="mbtn" href="./combo/01-employee-auth.html">Unit Claiming - Combo Skid</a>
+<a class="mbtn" href="./machine/01-employee-auth.html">Print Machine Number</a>
+<a class="mbtn" href="./location/01-employee-auth.html">Location Label (Princeton)</a>
+<a class="mbtn" href="../LeakingHousingLabel.html">HGP Leaking Housing Label</a>
+<a class="mbtn" href="./kit/01-employee-auth.html">Kit Claiming (All Plants)</a>
+<a class="mbtn" href="./reprint/01-employee-auth.html">Unit Claiming Reprint</a>
+</div>
+<div class="washed"><h3>Disabled 6/8/2026</h3>
+<div class="btngrid">
+<span class="mbtn off">Washed/Leak Tested Label</span>
+<span class="mbtn off">Washed/Leak Tested Label (Reprint)</span>
+</div>
+<p class="hint">I.T. suspects these buttons are no longer used (<span class="mono">Visible = false</span> in source). If re-enabled, they open the Washed/Leak Tested form — see <a href="../WashedLeakTestedLabel.html">WashedLeakTestedLabel spec</a>.</p>
+</div>
+<footer class="src"><strong>Source grounding:</strong>
+<span class="mono">ref-code-20260904/UnitClaimingUI/MainMenu.cs</span> (button → ShowUnitClaiming variation wiring) +
+<span class="mono">MainMenu.Designer.cs</span> (13 controls, washed pair hidden).
+Wireframe only — buttons navigate, nothing saves.</footer>
+</body>
+</html>

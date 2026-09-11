@@ -114,39 +114,9 @@ flowchart TD
 <p><a href="./wizard/01-employee-auth.html">Start the Standard wizard walkthrough &rsaquo;</a>
 (Employee Auth &rarr; Part Number &rarr; Serial &rarr; Pallet Qty &rarr; Skid Weight &rarr; Complete).
 CSS mockups with Prev/Next wired per the real nav rules.</p>
-<h2>Wizard variation click-throughs</h2>
-<div class="diagram-shell"><div class="mermaid-wrap">
-<div class="zoom-controls"><button data-z="in">+</button><button data-z="out">&minus;</button><button data-z="reset">reset</button><span style="font-size:.8rem;color:var(--text-dim);align-self:center;">click a variation to open its walkthrough</span></div>
-<div class="mermaid-viewport"><div class="mermaid-canvas" id="wizvar">
-<pre class="mermaid">
-flowchart TD
-    MM[MainMenu buttons]
-    VSTD[Standard - 6 steps]
-    VRP[Reprint - 3 steps]
-    VBL[Box Label - 5 steps]
-    VLV[Low Volume - 6 steps]
-    VKIT[Kit - 5 steps]
-    VMN[Machine Number - 3 steps]
-    VLOC[Location - 3 steps]
-    VCB[Combo - 7 steps]
-    MM --> VSTD
-    MM --> VRP
-    MM --> VBL
-    MM --> VLV
-    MM --> VKIT
-    MM --> VMN
-    MM --> VLOC
-    MM --> VCB
-    click VSTD "./wizard/01-employee-auth.html" "Open walkthrough"
-    click VRP "./wizard/reprint/01-employee-auth.html" "Open walkthrough"
-    click VBL "./wizard/boxlabel/01-employee-auth.html" "Open walkthrough"
-    click VLV "./wizard/lowvolume/01-employee-auth.html" "Open walkthrough"
-    click VKIT "./wizard/kit/01-employee-auth.html" "Open walkthrough"
-    click VMN "./wizard/machine/01-employee-auth.html" "Open walkthrough"
-    click VLOC "./wizard/location/01-employee-auth.html" "Open walkthrough"
-    click VCB "./wizard/combo/01-employee-auth.html" "Open walkthrough"
-</pre>
-</div></div></div></div>
+<h2>Wizard walkthroughs</h2>
+<p><a href="./wizard/main-menu.html">Open the Main Menu &rsaquo;</a>
+Every button opens its flow — the same entry point as the legacy app.</p>
 <table>
 <thead><tr><th>Variation</th><th>Steps</th><th>Notes</th></tr></thead>
 <tbody>
