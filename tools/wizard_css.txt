@@ -1,0 +1,62 @@
+  html { font-size: 16px; }
+  :root {
+    --bg: #f4f1ea; --surface: #ffffff; --border: rgba(20,40,70,.12);
+    --text: #1c2b3a; --text-dim: #5b6b7c;
+    --primary: #0f5e8a; --primary-dim: rgba(15,94,138,.08);
+    --accent: #b3541e; --ok: #1e7e46;
+    --mono: 'Fragment Mono','SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101820; --surface: #182430; --border: rgba(255,255,255,.1);
+      --text: #dbe7f0; --text-dim: #8fa3b5;
+      --primary: #4fb0e0; --primary-dim: rgba(79,176,224,.14);
+      --accent: #e09a4f; --ok: #4fce7f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif;
+         max-width: 72rem; margin: 0 auto; padding: 2rem 1.5rem; font-size: 1rem; line-height: 1.5; }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: var(--text-dim); }
+  nav.crumb { margin-bottom: 1.25rem; font-size: .9rem; }
+  nav.crumb a { color: var(--primary); }
+  .steps { display: flex; gap: .4rem; margin: 1rem 0 1.5rem; flex-wrap: wrap; }
+  .steps a, .steps span { padding: .35rem .7rem; border: 1px solid var(--border); border-radius: 2rem;
+    font-size: .8rem; text-decoration: none; color: var(--text-dim); background: var(--surface); }
+  .steps .cur { background: var(--primary); color: #fff; border-color: var(--primary); font-weight: 600; }
+  .steps .done { color: var(--primary); border-color: var(--primary); }
+  .mock { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem; }
+  @media (max-width: 60rem) { .mock { grid-template-columns: 1fr; } }
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1.25rem 1.4rem; }
+  .panel h2 { font-size: 1.15rem; margin: 0 0 .8rem; border-bottom: 2px solid var(--primary); padding-bottom: .35rem; }
+  .field { margin: .8rem 0; }
+  .field label { display: block; font-size: .85rem; color: var(--text-dim); margin-bottom: .3rem; }
+  .field input[type=text] { width: 100%; font-size: 1.1rem; padding: .55rem .7rem;
+    border: 2px solid var(--primary); border-radius: .4rem; background: var(--bg); color: var(--text); }
+  .field select { width: 100%; font-size: 1.05rem; padding: .55rem .7rem;
+    border: 2px solid var(--primary); border-radius: .4rem; background: var(--bg); color: var(--text); }
+  .sample { border: 1px dashed var(--border); border-radius: .4rem; padding: .6rem .8rem; margin-top: .8rem; font-size: .85rem; }
+  .sample .mono { font-family: var(--mono); }
+  .hint { font-size: .82rem; color: var(--text-dim); margin-top: .5rem; }
+  .summary { display: grid; grid-template-columns: auto 1fr; gap: .35rem .9rem; font-size: .9rem; }
+  .summary dt { color: var(--text-dim); } .summary dd { margin: 0; font-family: var(--mono); font-size: .85rem; }
+  .navbtns { display: flex; gap: .8rem; margin-top: 1.5rem; }
+  .navbtns a { padding: .7rem 1.6rem; border-radius: .45rem; text-decoration: none; font-weight: 600; }
+  .prev { border: 2px solid var(--primary); color: var(--primary); }
+  .next { background: var(--primary); color: #fff; }
+  .disabled { opacity: .35; pointer-events: none; }
+  .note { background: var(--primary-dim); border-left: 4px solid var(--primary);
+          padding: .7rem 1rem; border-radius: 0 .5rem .5rem 0; margin: .8rem 0; font-size: .9rem; }
+  footer.src { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border);
+               font-size: .82rem; color: var(--text-dim); }
+  .btnrow { display: flex; gap: .6rem; margin-top: .8rem; flex-wrap: wrap; }
+  .btnrow button { padding: .55rem 1.1rem; border-radius: .4rem; border: 2px solid var(--primary);
+    background: var(--surface); color: var(--primary); font-weight: 600; cursor: pointer; }
+  .diagram-shell { background: var(--surface); border: 1px solid var(--border); border-radius: .6rem; padding: 1rem; margin: 1rem 0; }
+  .mermaid-wrap { position: relative; }
+  .zoom-controls { display: flex; gap: .4rem; margin-bottom: .5rem; }
+  .zoom-controls button { font-size: .8rem; padding: .25rem .6rem; cursor: pointer; }
+  .mermaid-viewport { overflow: auto; max-height: 24rem; border: 1px solid var(--border); border-radius: .4rem; }
+  .mermaid-canvas { min-height: 6rem; padding: .5rem; }
+  .mermaid-canvas svg { max-width: none !important; }
