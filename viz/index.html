@@ -77,17 +77,17 @@ flowchart TD
     SetToleranceFactor[SetToleranceFactor]
     ErrorDetail[ErrorDetail]
     xxEditPackagingData[xxEditPackagingData]
-    MDI -->|loads, shows| MainMenu
-    MDI -->|btnUnitClaiming etc.| UnitClaimingMainForm
+    MDI -->|startup: loads| MainMenu
+    MDI -->|claiming buttons| UnitClaimingMainForm
     MDI -->|btnWashedLeakTested| WashedLeakTestedLabel
     MDI -->|btnLeakingHousingLabel| LeakingHousingLabel
-    MDI -->|View Data| ViewUnitClaimingData
-    MDI -->|Import Units from MTMS| ImportFromMTMS
-    MDI -->|Configure| Configuration
+    MDI -->|menu: View Data| ViewUnitClaimingData
+    MDI -->|menu: Import Units from MTMS| ImportFromMTMS
+    MDI -->|menu: Configure| Configuration
     MDI -->|row detail| ViewUnitClaimingDataPopup
-    MDI -->|tolerance action| SetToleranceFactor
+    MDI -->|various callers| SetToleranceFactor
     MDI -->|error path| ErrorDetail
-    MDI -->|EditPackagingData (commented out)| xxEditPackagingData
+    MDI -->|disabled menu hook| xxEditPackagingData
 </pre>
 </div></div></div></div>
 <h2>Screens</h2>
