@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Main Menu — wizard hub</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3EM%3C/text%3E%3C/svg%3E">
-<style>
-  html { font-size: 16px; }
+<title>View Claiming Data — View Claiming Data</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f5e8a'/%3E%3Ctext x='32' y='42' font-size='28' text-anchor='middle' fill='white' font-family='sans-serif'%3ES%3C/text%3E%3C/svg%3E">
+<style>  html { font-size: 16px; }
   :root {
     --bg: #f4f1ea; --surface: #ffffff; --border: rgba(20,40,70,.12);
     --text: #1c2b3a; --text-dim: #5b6b7c;
@@ -68,52 +67,29 @@
   .mermaid-viewport { overflow: auto; max-height: 24rem; border: 1px solid var(--border); border-radius: .4rem; }
   .mermaid-canvas { min-height: 6rem; padding: .5rem; }
   .mermaid-canvas svg { max-width: none !important; }
-
-  .menustrip { display: flex; gap: 0; background: var(--surface); border: 1px solid var(--border);
-    border-radius: .5rem; overflow: hidden; margin-bottom: 1.25rem; flex-wrap: wrap; }
-  .menustrip a { padding: .6rem 1.1rem; text-decoration: none; color: var(--text); font-size: .9rem;
-    border-right: 1px solid var(--border); }
-  .menustrip a:hover { background: var(--primary-dim); }
-  .btngrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .8rem; }
-  .mbtn { display: block; padding: 1rem; text-align: center; background: var(--primary); color: #fff;
-    border-radius: .5rem; text-decoration: none; font-weight: 600; }
-  .mbtn.off { background: var(--surface); color: var(--text-dim); border: 2px dashed var(--border);
-    pointer-events: none; }
-  .washed { border: 2px solid var(--border); border-radius: .6rem; padding: 1rem; margin-top: 1rem; }
-  .washed h3 { margin: 0 0 .2rem; font-size: .95rem; color: var(--text-dim); }
 </style>
 </head>
 <body>
-<nav class="crumb"><a href="../index.html">viz index</a> &rsaquo; Main Menu</nav>
-<div class="eyebrow">Unit Claiming &middot; main menu (entry point)</div>
-<h1>Main Menu</h1>
-<p>Opened at startup via <span class="mono">ShowMainMenu</span>. Every button below opens its flow — click through.</p>
-<div class="menustrip">
-<a href="../screens/view-data.html">View Data</a>
-<a href="../screens/import-mtms.html">Import Units from MTMS</a>
-<a href="../screens/configuration.html">Configure</a>
+<nav class="crumb"><a href="../index.html">viz index</a> &rsaquo; View Claiming Data</nav>
+<div class="eyebrow">Unit Claiming &middot; View Claiming Data</div>
+<h1>View Claiming Data</h1>
+<p>Menu: View Data. Grid of claimed skids, newest first (CreatedDate desc). Double-click a row to jump back to its step; Edit Claimed Qty opens the popup.</p>
+
+<div class="panel"><h2>Claimed skids</h2>
+<table><thead><tr><th>Pallet Id</th><th>Model #</th><th>Skid Qty</th><th>Claimed</th><th>Serial</th><th>Weight</th><th>Plant</th><th>Created</th></tr></thead>
+<tbody><tr><td class='mono'>P-00411</td><td class='mono'>M100-A</td><td>40</td><td>40</td><td class='mono'>7159D60101</td><td>118.4</td><td>Sullivan</td><td>2026-09-01</td></tr>
+<tr><td class='mono'>P-00412</td><td class='mono'>M100-A</td><td>40</td><td>40</td><td class='mono'>7159D60102</td><td>118.4</td><td>Sullivan</td><td>2026-09-02</td></tr>
+<tr><td class='mono'>P-00413</td><td class='mono'>M100-A</td><td>40</td><td>40</td><td class='mono'>7159D60103</td><td>118.4</td><td>Sullivan</td><td>2026-09-03</td></tr>
+<tr><td class='mono'>P-00414</td><td class='mono'>M100-A</td><td>40</td><td>40</td><td class='mono'>7159D60104</td><td>118.4</td><td>Sullivan</td><td>2026-09-04</td></tr>
+<tr><td class='mono'>P-00415</td><td class='mono'>M100-A</td><td>40</td><td>40</td><td class='mono'>7159D60105</td><td>118.4</td><td>Sullivan</td><td>2026-09-05</td></tr></tbody></table>
+<div class="btnrow"><button type="button">|&lt;</button><button type="button">&lt;</button><span>Page 1 of 1</span><button type="button">&gt;</button><button type="button">&gt;|</button></div>
 </div>
-<div class="btngrid">
-<a class="mbtn" href="./01-employee-auth.html">Unit Claiming</a>
-<a class="mbtn" href="./lowvolume/01-employee-auth.html">Low Volume Claiming</a>
-<a class="mbtn" href="./boxlabel/01-employee-auth.html">Box Label</a>
-<a class="mbtn" href="./combo/01-employee-auth.html">Unit Claiming - Combo Skid</a>
-<a class="mbtn" href="./machine/01-employee-auth.html">Print Machine Number</a>
-<a class="mbtn" href="./location/01-employee-auth.html">Location Label (Princeton)</a>
-<a class="mbtn" href="../LeakingHousingLabel.html">HGP Leaking Housing Label</a>
-<a class="mbtn" href="./kit/01-employee-auth.html">Kit Claiming (All Plants)</a>
-<a class="mbtn" href="./reprint/01-employee-auth.html">Unit Claiming Reprint</a>
+<div class="panel"><h2>Filters</h2>
+<p><strong>Plant Location:</strong> <label><input type="checkbox" checked> Sullivan</label> <label><input type="checkbox" checked> Princeton</label> <label><input type="checkbox" checked> Indianapolis</label> <label><input type="checkbox" checked> Huntingdon</label></p>
+<p><label><input type="checkbox" checked> Claimed but not yet imported into MTMS</label></p>
+<div class="btnrow"><button type="button" onclick="location.href='./view-data-popup.html'">Edit Claimed Qty</button></div>
 </div>
-<div class="washed"><h3>Disabled 6/8/2026</h3>
-<div class="btngrid">
-<span class="mbtn off">Washed/Leak Tested Label</span>
-<span class="mbtn off">Washed/Leak Tested Label (Reprint)</span>
-</div>
-<p class="hint">I.T. suspects these buttons are no longer used (<span class="mono">Visible = false</span> in source). If re-enabled, they open the Washed/Leak Tested form — walk it anyway: <a href="./washed/01-employee.html">Washed/Leak Tested walkthrough</a> (spec: <a href="../WashedLeakTestedLabel.html">inventory</a>).</p>
-</div>
-<footer class="src"><strong>Source grounding:</strong>
-<span class="mono">ref-code-20260904/UnitClaimingUI/MainMenu.cs</span> (button → ShowUnitClaiming variation wiring) +
-<span class="mono">MainMenu.Designer.cs</span> (13 controls, washed pair hidden).
-Wireframe only — buttons navigate, nothing saves.</footer>
+<footer class="src"><strong>Source grounding:</strong> <span class="mono">ref-code-20260904/UnitClaimingUI/ViewUnitClaimingData.cs</span>. Wireframe only — inputs do not save.</footer>
+
 </body>
 </html>
