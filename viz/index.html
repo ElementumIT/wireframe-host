@@ -88,6 +88,26 @@ flowchart TD
     MDI -->|various callers| SetToleranceFactor
     MDI -->|error path| ErrorDetail
     MDI -->|disabled menu hook| xxEditPackagingData
+
+    subgraph StandardWizard[Standard wizard steps]
+    direction LR
+    S1[1 Employee Auth]
+    S2[2 Part Number]
+    S3[3 Serial Number]
+    S4[4 Pallet Quantity]
+    S5[5 Skid Weight]
+    S6[6 Skid Complete]
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    end
+    UnitClaimingMainForm -->|Standard variation| S1
+
+    click S1 "./wizard/01-employee-auth.html" "Open step mockup"
+    click S2 "./wizard/02-part-number.html" "Open step mockup"
+    click S3 "./wizard/03-serial-number.html" "Open step mockup"
+    click S4 "./wizard/04-pallet-quantity.html" "Open step mockup"
+    click S5 "./wizard/05-skid-weight.html" "Open step mockup"
+    click S6 "./wizard/06-skid-complete.html" "Open step mockup"
+    
 </pre>
 </div></div></div></div>
 <h2>Standard wizard click-through</h2>
